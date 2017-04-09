@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class RSATest {
     private Modulo m;
-    private final int k = 2048;
+    private final int k = 1024;
 
     @Before
     public void setUp() throws Exception {
@@ -54,7 +54,10 @@ public class RSATest {
     public void shouldGetBackPlaintext() throws Exception {
         BigInteger plainText = new BigInteger("42");
         BigInteger cipher = RSA.encrypt(plainText, m);
+        assertThat(RSA.decrypt(cipher, m), is(plainText));
 
+        plainText = new BigInteger("12345678");
+        cipher = RSA.encrypt(plainText, m);
         assertThat(RSA.decrypt(cipher, m), is(plainText));
     }
 }
