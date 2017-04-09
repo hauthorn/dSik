@@ -1,6 +1,7 @@
 package uge1;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -15,7 +16,7 @@ public class RSA {
 
     public static Modulo keyGen(int k) {
         Modulo m = new Modulo();
-        Random random = new Random();
+        Random random = new SecureRandom();
         m.q = new BigInteger(k/2, 100, random);
         m.p = new BigInteger(k/2, 100, random);
         m.n = m.q.multiply(m.p);
@@ -24,7 +25,7 @@ public class RSA {
 
         // Keep trying until the relation holds
         while(!(m.n.bitLength() == k && e.gcd(phi).equals(BigInteger.ONE))) {
-            random = new Random();
+            random = new SecureRandom();
             m.q = new BigInteger(k/2, random);
             m.p = new BigInteger(k/2, random);
             m.n = m.q.multiply(m.p);
