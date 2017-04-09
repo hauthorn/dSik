@@ -20,15 +20,18 @@ public class RSA {
         m.p = new BigInteger(k/2, 100, random);
         m.n = m.q.multiply(m.p);
 
+        BigInteger phi = getPhi(m);
+
         // Keep trying until the relation holds
-        while(!(m.n.bitLength() == k && e.gcd(m.q.subtract(BigInteger.ONE)).equals(BigInteger.ONE) && e.gcd(m.p.subtract(BigInteger.ONE)).equals(BigInteger.ONE))) {
+        while(!(m.n.bitLength() == k && e.gcd(phi).equals(BigInteger.ONE))) {
             random = new Random();
             m.q = new BigInteger(k/2, random);
             m.p = new BigInteger(k/2, random);
             m.n = m.q.multiply(m.p);
+            phi = getPhi(m);
         }
 
-        m.d = RSA.e.modInverse((m.p.subtract(BigInteger.ONE)).multiply((m.q.subtract(BigInteger.ONE))));
+        m.d = RSA.e.modInverse(phi);
 
         return m;
     }
@@ -39,5 +42,9 @@ public class RSA {
 
     public static BigInteger decrypt(BigInteger cipher, Modulo m) {
         return cipher.modPow(m.d, m.n);
+    }
+
+    private static BigInteger getPhi(Modulo m) {
+        return m.q.subtract(BigInteger.ONE).multiply(m.p.subtract(BigInteger.ONE));
     }
 }
