@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class RSATest {
     private Modulo m;
-    private final int k = 20;
+    private final int k = 2048;
 
     @Before
     public void setUp() throws Exception {
@@ -22,9 +22,8 @@ public class RSATest {
 
     @Test
     public void shouldCreateValidPairPQ() throws Exception {
-        BigInteger one = new BigInteger("1");
-        assertThat(RSA.e.gcd(m.q.subtract(one)), is(one));
-        assertThat(RSA.e.gcd(m.p.subtract(one)), is(one));
+        assertThat(RSA.e.gcd(m.q.subtract(BigInteger.ONE)), is(BigInteger.ONE));
+        assertThat(RSA.e.gcd(m.p.subtract(BigInteger.ONE)), is(BigInteger.ONE));
     }
 
     @Test
@@ -35,21 +34,20 @@ public class RSATest {
 
     @Test
     public void shouldCreateValidD() throws Exception {
-        BigInteger one = new BigInteger("1");
-        BigInteger condition = (RSA.e.multiply(m.d)).mod((m.p.subtract(one)).multiply(m.q.subtract(one)));
-        assertThat(condition, is(one));
+        BigInteger condition = (RSA.e.multiply(m.d)).mod(m.p.subtract(BigInteger.ONE).multiply(m.q.subtract(BigInteger.ONE)));
+        assertThat(condition, is(BigInteger.ONE));
     }
 
     @Test
     public void shouldEncrypt() throws Exception {
         BigInteger plainText = new BigInteger("42");
-        assertThat(RSA.encrypt(plainText, m), is(plainText.pow(RSA.e.intValue()).mod(m.n)));
+        assertThat(RSA.encrypt(plainText, m), is(plainText.modPow(RSA.e, m.n)));
     }
 
     @Test
     public void shouldDecrypt() throws Exception {
         BigInteger cipher = new BigInteger("42");
-        assertThat(RSA.decrypt(cipher, m), is(cipher.pow(m.d.intValue()).mod(m.n)));
+        assertThat(RSA.decrypt(cipher, m), is(cipher.modPow(m.d, m.n)));
     }
 
     @Test

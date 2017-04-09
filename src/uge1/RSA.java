@@ -15,29 +15,29 @@ public class RSA {
 
     public static Modulo keyGen(int k) {
         Modulo m = new Modulo();
-        m.q = new BigInteger(k/2, new Random());
-        m.p = new BigInteger(k/2, new Random());
+        Random random = new Random();
+        m.q = new BigInteger(k/2, 100, random);
+        m.p = new BigInteger(k/2, 100, random);
         m.n = m.q.multiply(m.p);
 
-        BigInteger one = new BigInteger("1");
-
         // Keep trying until the relation holds
-        while(!(m.n.bitLength() == k && e.gcd(m.q.subtract(one)).equals(one) && e.gcd(m.p.subtract(one)).equals(one))) {
-            m.q = new BigInteger(k/2, new Random());
-            m.p = new BigInteger(k/2, new Random());
+        while(!(m.n.bitLength() == k && e.gcd(m.q.subtract(BigInteger.ONE)).equals(BigInteger.ONE) && e.gcd(m.p.subtract(BigInteger.ONE)).equals(BigInteger.ONE))) {
+            random = new Random();
+            m.q = new BigInteger(k/2, random);
+            m.p = new BigInteger(k/2, random);
             m.n = m.q.multiply(m.p);
         }
 
-        m.d = RSA.e.modPow(new BigInteger("-1"), (m.p.subtract(one)).multiply((m.q.subtract(one))));
+        m.d = RSA.e.modInverse((m.p.subtract(BigInteger.ONE)).multiply((m.q.subtract(BigInteger.ONE))));
 
         return m;
     }
 
     public static BigInteger encrypt(BigInteger plainText, Modulo m) {
-        return plainText.pow(RSA.e.intValue()).mod(m.n);
+        return plainText.modPow(e, m.n);
     }
 
     public static BigInteger decrypt(BigInteger cipher, Modulo m) {
-        return cipher.pow(m.d.intValue()).mod(m.n);
+        return cipher.modPow(m.d, m.n);
     }
 }
