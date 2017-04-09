@@ -36,8 +36,8 @@ public class RSATest {
     @Test
     public void shouldCreateValidD() throws Exception {
         BigInteger one = new BigInteger("1");
-        BigInteger expected = RSA.e.mod((m.p.subtract(one)).multiply((m.q.subtract(one))));
-        assertThat(m.d, is(expected));
+        BigInteger condition = (RSA.e.multiply(m.d)).mod((m.p.subtract(one)).multiply(m.q.subtract(one)));
+        assertThat(condition, is(one));
     }
 
     @Test
@@ -55,7 +55,8 @@ public class RSATest {
     @Test
     public void shouldGetBackPlaintext() throws Exception {
         BigInteger plainText = new BigInteger("42");
+        BigInteger cipher = RSA.encrypt(plainText, m);
 
-        assertThat(RSA.decrypt(RSA.encrypt(plainText, m), m), is(plainText));
+        assertThat(RSA.decrypt(cipher, m), is(plainText));
     }
 }

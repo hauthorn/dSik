@@ -28,7 +28,7 @@ public class RSA {
             m.n = m.q.multiply(m.p);
         }
 
-        m.d = RSA.e.modInverse((m.p.subtract(one)).multiply((m.q.subtract(one))));
+        m.d = RSA.e.modPow(new BigInteger("-1"), (m.p.subtract(one)).multiply((m.q.subtract(one))));
 
         return m;
     }
