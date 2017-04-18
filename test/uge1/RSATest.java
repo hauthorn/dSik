@@ -8,12 +8,9 @@ import java.math.BigInteger;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by Christoffer on 2017-04-09.
- */
 public class RSATest {
     private Modulo m;
-    private final int k = 1024;
+    private final int k = 1100;
 
     @Before
     public void setUp() throws Exception {

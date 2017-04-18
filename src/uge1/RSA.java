@@ -26,8 +26,8 @@ public class RSA {
         // Keep trying until the relation holds
         while(!(m.n.bitLength() == k && e.gcd(phi).equals(BigInteger.ONE))) {
             random = new SecureRandom();
-            m.q = new BigInteger(k/2, random);
-            m.p = new BigInteger(k/2, random);
+            m.q = new BigInteger(k/2,100, random);
+            m.p = new BigInteger(k/2, 100,random);
             m.n = m.q.multiply(m.p);
             phi = getPhi(m);
         }
