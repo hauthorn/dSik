@@ -18,5 +18,7 @@ Remember to setup your iml file as follows:
 </module>
 ```
 
-## Uge 1
+## Handin 1
 We implemented and tested an implemantation of RSA. Source package `src/uge1`
+
+Run `test/uge1/RSATest` to see test results.
