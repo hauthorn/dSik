@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class RSATest {
     private Modulo m;
-    private final int k = 1100;
+    private final int k = 2000;
 
     @Before
     public void setUp() throws Exception {
