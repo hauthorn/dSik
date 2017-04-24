@@ -21,7 +21,7 @@ public class Signature {
         return RSA.encrypt(signature, modulo).equals(digestAsBigInt(message));
     }
 
-    private static BigInteger digestAsBigInt(BigInteger message) {
+    public static BigInteger digestAsBigInt(BigInteger message) {
         try {
             MessageDigest instance = MessageDigest.getInstance("SHA-256");
             return new BigInteger(1, instance.digest(message.toByteArray()));
