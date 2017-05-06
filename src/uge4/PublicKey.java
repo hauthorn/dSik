@@ -3,6 +3,7 @@ package uge4;
 import uge1.Modulo;
 import uge1.RSA;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigInteger;
  * @author Christoffer
  * @since 2017-05-06
  */
-public class PublicKey {
+public class PublicKey implements Serializable {
     public BigInteger n, e;
 
     public PublicKey(Modulo modulo) {

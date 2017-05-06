@@ -20,7 +20,7 @@ import java.util.Random;
  * @since 2017-05-06
  *
  */
-public class Client {
+public class Client extends Base {
     public static void main(String[] args) {
         String servername = args[0];
         int portNumber = Integer.parseInt(args[1]);
@@ -67,6 +67,8 @@ public class Client {
         }
     }
 
+    private BigInteger a;
+
     /**
      * Verifies the signature from the server of the messages seen so far.
      * @param clientSignature
@@ -76,18 +78,8 @@ public class Client {
      */
     private boolean verifyServerSignature(BigInteger clientSignature, BigInteger serverSignature, PublicKey serverPublicKey) {
         Modulo serverKey = new Modulo();
-        serverKey.n = publicKey.n;
+        serverKey.n = serverPublicKey.n;
         return Signature.verifySignature(messageSoFar.add(clientSignature), serverSignature, serverKey);
-    }
-
-    private Modulo keyPair;
-    private PublicKey publicKey;
-    private BigInteger a, toSend, key, messageSoFar;
-
-
-    private void generatePublicKey() {
-        keyPair = RSA.keyGen(2000);
-        publicKey = new PublicKey(keyPair);
     }
 
     private void sendInitialMessage(ObjectOutputStream objectOutputStream) throws IOException {
@@ -121,8 +113,7 @@ public class Client {
      * Choose a random value A
      */
     private void chooseA() {
-        Random random = new SecureRandom();
-        a = new BigInteger(2000, random);
+        a = KeyExchangeCommons.randomNumber();
     }
 
     /**
