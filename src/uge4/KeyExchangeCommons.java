@@ -1,10 +1,12 @@
 package uge4;
 
+import java.math.BigInteger;
+
 /**
  * @author Christoffer
  * @since 2017-05-06
  */
 public class KeyExchangeCommons {
-    public static final int G = 123;
-    public static final int P = 12345;
+    public static final BigInteger G = new BigInteger("123");
+    public static final BigInteger P = new BigInteger("12345");
 }
