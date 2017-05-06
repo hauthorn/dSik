@@ -22,3 +22,8 @@ Remember to setup your iml file as follows:
 We implemented and tested an implemantation of RSA. Source package `src/uge1`
 
 Run `test/uge1/RSATest` to see test results.
+
+## Handin 2
+We implemented the Signature class to hash a message and apply a signature to it.
+
+We also implemented `uge2/Main`, which experimentally shows how fast the algorithms are.
