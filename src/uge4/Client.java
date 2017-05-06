@@ -1,6 +1,9 @@
 package uge4;
 
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
@@ -15,6 +18,20 @@ public class Client {
         System.out.println("Client starting, connecting to " + servername + ":" + portNumber);
         Client client = new Client();
         Socket socket = client.connectToServer(servername, portNumber);
+
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            // Choose random number and send g^a mod p + public key
+            // Receive servers g^b mod p + public key
+            // Compute common key
+            // Sign all messages seen so far, and send signature to Server
+            // Receive signature from server
+            // Check signature
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -38,6 +38,14 @@ public class Server {
             if (socket != null) {
 
                 System.out.println("Connection from " + socket);
+
+                // Receive g^a mod p + public key from client
+                // Choose random number and send g^a mod p + public key
+                // Compute common key
+                // Receive clients signature of messages
+                // Check signature
+                // Sign all messages seen so far, and send signature to Client
+                // Ready to receive stuff from the Client
                 try {
                     BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String s;
