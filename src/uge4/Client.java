@@ -1,7 +1,6 @@
 package uge4;
 
 import uge1.Modulo;
-import uge1.RSA;
 import uge2.Signature;
 
 import java.io.IOException;
@@ -9,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.net.Socket;
-import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * Based on code from dDist.
