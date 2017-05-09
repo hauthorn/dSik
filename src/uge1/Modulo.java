@@ -1,10 +1,11 @@
 package uge1;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 /**
- * Created by Christoffer on 2017-04-09.
+ * Represents the collection of bigintegers needed in RSA.
  */
-public class Modulo {
+public class Modulo implements Serializable {
     public BigInteger n, p, q, d;
 }

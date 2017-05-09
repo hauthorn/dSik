@@ -27,3 +27,8 @@ Run `test/uge1/RSATest` to see test results.
 We implemented the Signature class to hash a message and apply a signature to it.
 
 We also implemented `uge2/Main`, which experimentally shows how fast the algorithms are.
+
+## Handin 4 (2017-05-09)
+We implemented Authenticated Key Exchange using the Diffie-Hellman key exchange algorithm.
+
+Run the Server class first, then `java Class <ip address of server> <port number of server (4321)>`.
