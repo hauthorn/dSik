@@ -19,8 +19,25 @@ import java.net.Socket;
  */
 public class Client extends Base {
     public static void main(String[] args) {
-        String servername = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        String servername = null;
+        int portNumber = 0;
+        try {
+            servername = args[0];
+            portNumber = Integer.parseInt(args[1]);
+        }
+        catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("You need to provide program argument. Run the client like so:\njava Client 192.168.0.1 4321");
+            System.exit(1);
+        }
+
+        if (servername == null || servername.equals("")) {
+            System.out.println("Missing server name (ip). Run the client with arguments like so:\njava Client 192.168.0.1 4321");
+            System.exit(1);
+        }
+        else if (portNumber == 0) {
+            System.out.println("Missing port number. Run the client with arguments like so:\njava Client 192.168.0.1 4321");
+            System.exit(1);
+        }
 
         System.out.println("Client starting, connecting to " + servername + ":" + portNumber);
         Client client = new Client();
